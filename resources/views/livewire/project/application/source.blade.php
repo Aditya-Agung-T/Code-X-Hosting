@@ -3,7 +3,7 @@
         <x-unsaved-bar action="submit" />
 
         <x-application.settings-section title="Repository"
-            description="Configure the Git repository, branch, and commit Coolify deploys.">
+            description="Configure the Git repository, branch, and commit Code X Hosting deploys.">
             <x-slot:actions>
                 <div class="flex flex-wrap items-center gap-2">
                     <a target="_blank" class="button" href="{{ $application?->gitBranchLocation }}">
@@ -46,7 +46,7 @@
 
     @if (filled($privateKeyId))
         <x-application.settings-section title="Deploy key"
-            description="The SSH key Coolify uses to clone this private repository.">
+            description="The SSH key Code X Hosting uses to clone this private repository.">
             <div
                 class="mb-4 flex items-center justify-between gap-3 rounded-lg bg-neutral-50 px-3 py-2.5 ring-1 ring-neutral-200 dark:bg-white/[0.025] dark:ring-white/[0.07]">
                 <span class="text-[12px] text-neutral-500 dark:text-fg-dim">Attached private key</span>
@@ -83,7 +83,7 @@
                 };
             @endphp
             <x-application.settings-section title="Git source"
-                description="Switch the Git provider App Coolify uses to clone this repository.">
+                description="Switch the Git provider App Code X Hosting uses to clone this repository.">
                 <div class="grid gap-2 sm:grid-cols-2">
                     @if ($currentSource)
                         <div

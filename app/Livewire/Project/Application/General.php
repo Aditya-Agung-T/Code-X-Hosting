@@ -350,8 +350,18 @@ class General extends Component
             $this->application->base_directory = $this->baseDirectory;
             $this->application->publish_directory = $this->publishDirectory;
             $this->application->ports_exposes = $this->portsExposes;
-            $this->application->ports_mappings = $this->portsMappings;
-            $this->application->custom_network_aliases = $this->customNetworkAliases;
+            // Security: In shared hosting, only instance admin can bind host ports
+            if (auth()->user()?->isInstanceAdmin()) {
+                $this->application->ports_mappings = $this->portsMappings;
+            } else {
+                $this->application->ports_mappings = null;
+            }
+            // Security: In shared hosting, only instance admin can set custom network aliases
+            if (auth()->user()?->isInstanceAdmin()) {
+                $this->application->custom_network_aliases = $this->customNetworkAliases;
+            } else {
+                $this->application->custom_network_aliases = null;
+            }
             $this->application->dockerfile = $this->dockerfile;
             $this->application->dockerfile_location = $this->dockerfileLocation;
             $this->application->dockerfile_target_build = $this->dockerfileTargetBuild;
@@ -365,7 +375,12 @@ class General extends Component
             $this->application->custom_labels = is_null($this->customLabels)
                 ? null
                 : base64_encode($this->customLabels);
-            $this->application->custom_docker_run_options = $this->customDockerRunOptions;
+            // Security: In shared hosting, only instance admin can set custom docker run options
+            if (auth()->user()?->isInstanceAdmin()) {
+                $this->application->custom_docker_run_options = $this->customDockerRunOptions;
+            } else {
+                $this->application->custom_docker_run_options = null;
+            }
             $this->application->pre_deployment_command = $this->preDeploymentCommand;
             $this->application->pre_deployment_command_container = $this->preDeploymentCommandContainer;
             $this->application->post_deployment_command = $this->postDeploymentCommand;

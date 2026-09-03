@@ -24,6 +24,62 @@ use Symfony\Component\Yaml\Yaml;
  *
  * @throws Exception If the compose file contains command injection attempts
  */
+function isSensitiveHostPath(string $path): bool
+{
+    $normalized = strtolower(rtrim(trim($path), '/'));
+
+    if (str_contains($normalized, 'docker.sock')) {
+        return true;
+    }
+
+    $forbiddenExact = [
+        '',
+        '/',
+        '/etc',
+        '/root',
+        '/proc',
+        '/sys',
+        '/dev',
+        '/boot',
+        '/bin',
+        '/sbin',
+        '/lib',
+        '/lib64',
+        '/usr',
+        '/var',
+        '/var/run',
+        '/data/coolify',
+        '/tmp/coolify',
+    ];
+
+    if (in_array($normalized, $forbiddenExact, true)) {
+        return true;
+    }
+
+    $forbiddenPrefixes = [
+        '/etc/',
+        '/root/',
+        '/proc/',
+        '/sys/',
+        '/dev/',
+        '/boot/',
+        '/bin/',
+        '/sbin/',
+        '/lib/',
+        '/lib64/',
+        '/data/coolify/',
+        '/tmp/coolify/',
+    ];
+
+    foreach ($forbiddenPrefixes as $prefix) {
+        if (str_starts_with($normalized, $prefix)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 function validateDockerComposeForInjection(string $composeYaml): void
 {
     try {
@@ -34,6 +90,31 @@ function validateDockerComposeForInjection(string $composeYaml): void
 
     if (! is_array($parsed) || ! isset($parsed['services']) || ! is_array($parsed['services'])) {
         throw new Exception('Docker Compose file must contain a "services" section');
+    }
+
+    // Enforce shared hosting security restrictions for non-instance-admins
+    $isInstanceAdmin = auth()->check() && auth()->user()->isInstanceAdmin();
+    if (! $isInstanceAdmin) {
+        foreach ($parsed['services'] as $serviceName => $serviceConfig) {
+            if (isset($serviceConfig['privileged']) && (bool) $serviceConfig['privileged']) {
+                throw new Exception("Security violation: 'privileged: true' is strictly prohibited in shared hosting.");
+            }
+            if (isset($serviceConfig['network_mode']) && strtolower((string) $serviceConfig['network_mode']) === 'host') {
+                throw new Exception("Security violation: 'network_mode: host' is strictly prohibited in shared hosting.");
+            }
+            if (isset($serviceConfig['pid']) && strtolower((string) $serviceConfig['pid']) === 'host') {
+                throw new Exception("Security violation: 'pid: host' is strictly prohibited in shared hosting.");
+            }
+            if (isset($serviceConfig['ipc']) && strtolower((string) $serviceConfig['ipc']) === 'host') {
+                throw new Exception("Security violation: 'ipc: host' is strictly prohibited in shared hosting.");
+            }
+            if (isset($serviceConfig['devices']) && ! empty($serviceConfig['devices'])) {
+                throw new Exception("Security violation: Direct host device access is strictly prohibited in shared hosting.");
+            }
+            if (isset($serviceConfig['cap_add']) && ! empty($serviceConfig['cap_add'])) {
+                throw new Exception("Security violation: Custom capabilities ('cap_add') are strictly prohibited in shared hosting.");
+            }
+        }
     }
     // Validate service names
     foreach ($parsed['services'] as $serviceName => $serviceConfig) {
@@ -57,6 +138,9 @@ function validateDockerComposeForInjection(string $composeYaml): void
                 } elseif (is_array($volume)) {
                     // Array format: {type: bind, source: ..., target: ...}
                     if (isset($volume['source'])) {
+                        if (! $isInstanceAdmin && isSensitiveHostPath((string) $volume['source'])) {
+                            throw new Exception("Security violation: Mounting host path '{$volume['source']}' is strictly prohibited in shared hosting.");
+                        }
                         $source = $volume['source'];
                         if (is_string($source)) {
                             // Allow env vars and env vars with defaults (validated in parseDockerVolumeString)
@@ -315,6 +399,12 @@ function parseDockerVolumeString(string $volumeString): array
         // Allow environment variables like ${VAR_NAME} or ${VAR}
         // Also allow env vars followed by safe path concatenation (e.g., ${VAR}/path)
         $sourceStr = is_string($source) ? $source : $source;
+        // Enforce shared hosting volume restrictions for non-instance-admins
+        if (! (auth()->check() && auth()->user()->isInstanceAdmin())) {
+            if (isSensitiveHostPath($sourceStr)) {
+                throw new Exception("Security violation: Mounting host path '{$sourceStr}' is strictly prohibited in shared hosting.");
+            }
+        }
 
         // Skip validation for simple environment variable references
         // Pattern 1: ${WORD_CHARS} with no special characters inside
@@ -805,6 +895,9 @@ function applicationParser(Application $resource, int $pull_request_id = 0, ?int
                 }
                 if ($type->value() === 'bind') {
                     if ($source->value() === '/var/run/docker.sock') {
+                        if (! (auth()->check() && auth()->user()->isInstanceAdmin())) {
+                            throw new \Exception("Security violation: Mounting '/var/run/docker.sock' is strictly prohibited.");
+                        }
                         $volume = $source->value().':'.$target->value();
                         if (isset($parsed['mode']) && $parsed['mode']) {
                             $volume .= ':'.$parsed['mode']->value();
@@ -2197,6 +2290,9 @@ function serviceParser(Service $resource): Collection
                 }
                 if ($type->value() === 'bind') {
                     if ($source->value() === '/var/run/docker.sock') {
+                        if (! (auth()->check() && auth()->user()->isInstanceAdmin())) {
+                            throw new \Exception("Security violation: Mounting '/var/run/docker.sock' is strictly prohibited.");
+                        }
                         $volume = $source->value().':'.$target->value();
                         if (isset($parsed['mode']) && $parsed['mode']) {
                             $volume .= ':'.$parsed['mode']->value();

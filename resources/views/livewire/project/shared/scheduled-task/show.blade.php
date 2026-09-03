@@ -2,7 +2,7 @@
     <form wire:submit="submit" class="application-settings-form flex flex-col">
         <x-unsaved-bar action="submit" />
         <x-application.settings-section id="task-configuration-section" title="Task configuration"
-            helper="Configure when this task runs and which command Coolify executes.">
+            helper="Configure when this task runs and which command Code X Hosting executes.">
             <x-slot:actions>
                 <x-status-badge :status="$isEnabled ? 'Enabled' : 'Disabled'" :type="$isEnabled ? 'success' : 'neutral'" />
                 @if ($resource->isRunning())

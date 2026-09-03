@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        {{ data_get_str($storage, 'name')->limit(20) }} | S3 Storage | Coolify
+        {{ data_get_str($storage, 'name')->limit(20) }} | S3 Storage | Code X Hosting
     </x-slot>
 
     @php
@@ -75,7 +75,7 @@
                                             <p class="mt-2 max-w-2xl text-[13px] leading-5 text-neutral-600 dark:text-fg-dim">
                                                 Permanently delete
                                                 <strong class="font-semibold text-black dark:text-fg">{{ $storage->name }}</strong>
-                                                from Coolify. Existing objects in the bucket are not deleted.
+                                                from Code X Hosting. Existing objects in the bucket are not deleted.
                                             </p>
                                             <ul class="mt-3 space-y-1 text-xs text-neutral-500 dark:text-fg-dim">
                                                 <li>• Backup schedules pointing at this storage will stop writing to S3.</li>
@@ -83,7 +83,7 @@
                                                     <li>• {{ $backupCount }} backup schedule(s) currently use this destination.</li>
                                                 @endif
                                                 <li>• Bucket contents on the provider are left untouched.</li>
-                                                <li>• This storage destination cannot be restored from Coolify after deletion.</li>
+                                                <li>• This storage destination cannot be restored from Code X Hosting after deletion.</li>
                                             </ul>
                                         </div>
 
@@ -92,7 +92,7 @@
                                                 <x-modal-confirmation title="Confirm Storage Deletion?" isErrorButton
                                                     buttonTitle="Delete" submitAction="delete"
                                                     :actions="array_filter([
-                                                        'The selected storage location will be permanently deleted from Coolify.',
+                                                        'The selected storage location will be permanently deleted from Code X Hosting.',
                                                         $backupCount > 0
                                                             ? $backupCount.' backup schedule(s) will stop saving to S3. Existing objects in this storage will not be deleted.'
                                                             : null,

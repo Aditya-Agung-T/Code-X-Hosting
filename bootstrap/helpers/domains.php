@@ -99,9 +99,27 @@ function checkDomainUsage(ServiceApplication|Application|null $resource = null, 
         return str($domain);
     });
 
-    // Filter applications by team if we have a current team
+    // Prevent hijacking the control panel domain
+    $instanceFqdn = instanceSettings()->fqdn;
+    if ($instanceFqdn) {
+        $cleanInstanceFqdn = str($instanceFqdn)->replace(['http://', 'https://'], '')->before('/')->before(':')->value();
+        foreach ($domains as $d) {
+            $cleanD = str($d)->replace(['http://', 'https://'], '')->before('/')->before(':')->value();
+            if ($cleanD !== '' && strtolower($cleanD) === strtolower($cleanInstanceFqdn)) {
+                $conflicts[] = [
+                    'domain' => $cleanD,
+                    'resource_name' => 'Control Panel',
+                    'resource_link' => '/',
+                    'resource_type' => 'system',
+                    'message' => "Domain $cleanD is reserved for the Code X Hosting control panel.",
+                ];
+            }
+        }
+    }
+
+    // In shared hosting, check domain collisions across ALL applications on the server
     $appsQuery = Application::query();
-    if ($currentTeam) {
+    if ($currentTeam && ! config('constants.hosting.shared_server_enabled', true)) {
         $appsQuery = $appsQuery->whereHas('environment.project', function ($query) use ($currentTeam) {
             $query->where('team_id', $currentTeam->id);
         });
@@ -138,9 +156,9 @@ function checkDomainUsage(ServiceApplication|Application|null $resource = null, 
         }
     }
 
-    // Filter service applications by team if we have a current team
+    // In shared hosting, check service applications across ALL teams on the server
     $serviceAppsQuery = ServiceApplication::query();
-    if ($currentTeam) {
+    if ($currentTeam && ! config('constants.hosting.shared_server_enabled', true)) {
         $serviceAppsQuery = $serviceAppsQuery->whereHas('service.environment.project', function ($query) use ($currentTeam) {
             $query->where('team_id', $currentTeam->id);
         });

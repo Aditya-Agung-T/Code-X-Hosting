@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        API Tokens | Coolify
+        API Tokens | Code X Hosting
     </x-slot>
 
     <x-security.settings-layout>
@@ -8,7 +8,7 @@
     @if (!$isApiEnabled)
         <div class="application-settings-form">
             <x-application.settings-section title="API disabled"
-                description="Enable the Coolify API before creating access tokens.">
+                description="Enable the Code X Hosting API before creating access tokens.">
                 <x-empty title="API access is turned off"
                     description="Enable API access in instance settings to issue tokens." icon-name="keys"
                     size="sm">

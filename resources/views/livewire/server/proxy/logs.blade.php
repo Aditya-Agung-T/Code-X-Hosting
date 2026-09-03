@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        Proxy Logs | Coolify
+        Proxy Logs | Code X Hosting
     </x-slot>
     <livewire:server.navbar :server="$server" />
     <div
@@ -8,7 +8,7 @@
         <x-server.sidebar :server="$server" activeMenu="proxy" activeSubMenu="logs" />
         <div class="application-settings-form w-full">
             <x-application.settings-section title="Proxy logs"
-                helper="Search, filter, follow, copy, or download recent output from the Coolify proxy container."
+                helper="Search, filter, follow, copy, or download recent output from the Code X Hosting proxy container."
                 flush class="logs-settings-section">
                 <x-slot:actions>
                     <x-status-badge :status="str($server->proxy->status)->headline()"
@@ -17,7 +17,7 @@
                 </x-slot:actions>
                 <div class="settings-log-panel">
                     <livewire:project.shared.get-logs :server="$server" container="coolify-proxy"
-                        displayName="Coolify Proxy" :collapsible="false" />
+                        displayName="Code X Hosting Proxy" :collapsible="false" />
                 </div>
             </x-application.settings-section>
         </div>

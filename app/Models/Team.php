@@ -269,6 +269,35 @@ class Team extends Model implements SendsDiscord, SendsEmail, SendsPushover, Sen
     {
         return $this->hasManyThrough(Application::class, Project::class);
     }
+    public function totalResourcesCount(): int
+    {
+        $projects = $this->projects()->withCount([
+            'applications',
+            'services',
+            'postgresqls',
+            'redis',
+            'keydbs',
+            'dragonflies',
+            'clickhouses',
+            'mongodbs',
+            'mysqls',
+            'mariadbs',
+        ])->get();
+
+        return (int) $projects->sum(function ($project) {
+            return $project->applications_count
+                + $project->services_count
+                + $project->postgresqls_count
+                + $project->redis_count
+                + $project->keydbs_count
+                + $project->dragonflies_count
+                + $project->clickhouses_count
+                + $project->mongodbs_count
+                + $project->mysqls_count
+                + $project->mariadbs_count;
+        });
+    }
+
 
     public function invitations()
     {

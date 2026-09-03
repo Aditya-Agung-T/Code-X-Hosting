@@ -1,5 +1,5 @@
 <div>
-    <x-slot:title>Appearance | Coolify</x-slot>
+    <x-slot:title>Appearance | Code X Hosting</x-slot>
     <div x-data="{
         theme: localStorage.getItem('theme') === 'purple' ? 'custom' : (localStorage.getItem('theme') || 'dark'),
         themeColor: localStorage.getItem('themeColor') || '#6b16ed',

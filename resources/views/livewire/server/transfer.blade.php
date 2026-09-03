@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        {{ data_get_str($server, 'name')->limit(10) }} > Transfer | Coolify
+        {{ data_get_str($server, 'name')->limit(10) }} > Transfer | Code X Hosting
     </x-slot>
 
     <livewire:server.navbar :server="$server" />
@@ -12,14 +12,14 @@
         <div class="application-settings-form flex w-full flex-col gap-6">
             @if ($this->isLocalhost)
                 <x-application.settings-section id="server-transfer-section" title="Transfer server (Dev)"
-                    helper="Move this server’s control-plane config to another Coolify instance (same physical host).">
+                    helper="Move this server’s control-plane config to another Code X Hosting instance (same physical host).">
                     <x-callout type="warning" title="Localhost cannot be transferred">
-                        The Coolify host (localhost) cannot be transferred between instances.
+                        The Code X Hosting host (localhost) cannot be transferred between instances.
                     </x-callout>
                 </x-application.settings-section>
             @else
                 <x-application.settings-section id="server-transfer-section" title="Transfer server (Dev)"
-                    helper="Move this server’s control-plane config to another Coolify instance (same physical host).">
+                    helper="Move this server’s control-plane config to another Code X Hosting instance (same physical host).">
                     <x-slot:actions>
                         <x-status-badge
                             :label="$this->transferStatus ?: 'ready'"
@@ -34,7 +34,7 @@
                             <h3 class="text-sm font-semibold text-neutral-950 dark:text-fg">Transfer to another instance
                             </h3>
                             <p class="mt-1 text-xs leading-5 text-neutral-500 dark:text-fg-dim">
-                                Enter the target Coolify URL and an API token from that instance (root recommended).
+                                Enter the target Code X Hosting URL and an API token from that instance (root recommended).
                                 This exports the server, imports and claims it on the target, then disables automations
                                 here.
                             </p>
@@ -42,7 +42,7 @@
                         <div class="flex flex-col gap-3 md:max-w-xl">
                             <x-forms.input id="targetUrl" label="Target instance URL" required
                                 placeholder="http://localhost:8001"
-                                helper="Base URL of the other Coolify instance (no trailing path)." />
+                                helper="Base URL of the other Code X Hosting instance (no trailing path)." />
                             <x-forms.input id="targetToken" type="password" label="Target API token" required
                                 placeholder="Paste token from target instance" autocomplete="off"
                                 helper="Create a token on the target with root (or write + create servers). It is only used for this request." />

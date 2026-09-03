@@ -1,7 +1,7 @@
 <div x-data
     x-init="@if ($server->hetzner_server_id && $server->cloudProviderToken && !$hetznerServerStatus) $wire.checkHetznerServerStatus(); @endif @if ($server->vultr_instance_id && $server->cloudProviderToken) $wire.checkVultrInstanceStatus(); @endif @if ($server->digitalocean_droplet_id && $server->cloudProviderToken && !$digitalOceanDropletStatus) $wire.checkDigitalOceanDropletStatus(); @endif">
     <x-slot:title>
-        {{ data_get_str($server, 'name')->limit(24) }} | Server | Coolify
+        {{ data_get_str($server, 'name')->limit(24) }} | Server | Code X Hosting
     </x-slot>
 
     <livewire:server.navbar :server="$server" />
@@ -114,7 +114,7 @@
                                 </p>
                                 <p class="mt-1 text-xs leading-5 text-neutral-500 dark:text-fg-dim">
                                     @if ($server->isTransferredAway())
-                                        This server was migrated away from this Coolify instance and cannot be managed here.
+                                        This server was migrated away from this Code X Hosting instance and cannot be managed here.
                                     @elseif ($server->isFunctional())
                                         The server is reachable, validated, and ready to host resources.
                                     @else
@@ -137,7 +137,7 @@
                     </x-application.settings-section>
 
                     <x-application.settings-section id="server-connection-section" title="Connection"
-                        helper="Configure how Coolify identifies, reaches, and validates this server.">
+                        helper="Configure how Code X Hosting identifies, reaches, and validates this server.">
                         <x-slot:actions>
                             @if ($hasLinkableCloudProviders)
                                 <div x-data="{ open: false }" class="relative" @click.outside="open = false">
@@ -200,7 +200,7 @@
 
                         @if ($server->isTransferredAway())
                             <x-callout type="warning" title="Transferred to another instance" class="mb-4">
-                                This server was migrated away from this Coolify instance. It cannot be revalidated or
+                                This server was migrated away from this Code X Hosting instance. It cannot be revalidated or
                                 managed here. Use the target instance, or delete this server when you no longer need the
                                 archive.
                             </x-callout>

@@ -38,7 +38,25 @@ class ResourceCreatePolicy
      */
     public function createAny(User $user): bool
     {
-        return $user->isAdmin();
+        if (! $user->isAdmin()) {
+            return false;
+        }
+
+        // Instance root administrators have unlimited resource creation quota
+        if ($user->isInstanceAdmin()) {
+            return true;
+        }
+
+        // Enforce maximum resource quota per customer workspace
+        $maxResources = (int) config('constants.hosting.max_resources_per_team', 2);
+        if ($maxResources > 0) {
+            $team = currentTeam();
+            if ($team && $team->totalResourcesCount() >= $maxResources) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

@@ -76,7 +76,7 @@ class ServerTransferExporter
     public function export(Server $server, bool $includeSensitive = true): array
     {
         if ($server->id === 0) {
-            throw new RuntimeException('The Coolify host (localhost) cannot be transferred between instances.');
+            throw new RuntimeException('The Code X Hosting host (localhost) cannot be transferred between instances.');
         }
 
         $server->loadMissing(['settings', 'privateKey', 'standaloneDockers', 'swarmDockers', 'cloudProviderToken', 'sslCertificates']);
@@ -289,7 +289,7 @@ class ServerTransferExporter
         $warnings = [];
 
         if ($dependencies['github_apps']->isNotEmpty()) {
-            $warnings[] = 'Team-scoped GitHub Apps were exported with credentials (system-wide apps are skipped). After import, update each GitHub App webhook URL (and setup/callback URL if used) to this Coolify instance so push/PR automations keep working. '
+            $warnings[] = 'Team-scoped GitHub Apps were exported with credentials (system-wide apps are skipped). After import, update each GitHub App webhook URL (and setup/callback URL if used) to this Code X Hosting instance so push/PR automations keep working. '
                 ."Webhook path: {$sourceInstanceUrl}/webhooks/source/github/events "
                 .'(replace host with the target instance FQDN after import). '
                 .'Also reinstall/refresh the GitHub App installation if installation_id is invalid on the new host.';
@@ -304,7 +304,7 @@ class ServerTransferExporter
             return $gh?->is_system_wide === true;
         });
         if ($usesSystemWideGithub) {
-            $warnings[] = 'Some applications use a system-wide GitHub App, which is not exported. On import, Coolify will re-link to a matching system-wide GitHub App on the target instance (by UUID) if one exists.';
+            $warnings[] = 'Some applications use a system-wide GitHub App, which is not exported. On import, Code X Hosting will re-link to a matching system-wide GitHub App on the target instance (by UUID) if one exists.';
         }
 
         $usesSystemWideGitlab = $applications->contains(function (Application $app) {
@@ -316,11 +316,11 @@ class ServerTransferExporter
             return $gl?->is_system_wide === true;
         });
         if ($usesSystemWideGitlab) {
-            $warnings[] = 'Some applications use a system-wide GitLab App, which is not exported. On import, Coolify will re-link to a matching system-wide GitLab App on the target instance (by UUID) if one exists.';
+            $warnings[] = 'Some applications use a system-wide GitLab App, which is not exported. On import, Code X Hosting will re-link to a matching system-wide GitLab App on the target instance (by UUID) if one exists.';
         }
 
         if ($dependencies['gitlab_apps']->isNotEmpty()) {
-            $warnings[] = 'Team-scoped GitLab Apps/OAuth sources were exported (system-wide apps are skipped). After import, update GitLab webhook URLs to the target Coolify instance '
+            $warnings[] = 'Team-scoped GitLab Apps/OAuth sources were exported (system-wide apps are skipped). After import, update GitLab webhook URLs to the target Code X Hosting instance '
                 ."({$sourceInstanceUrl}/webhooks/source/gitlab/events — use the new FQDN) and refresh OAuth tokens if needed.";
         }
 

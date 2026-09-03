@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        {{ data_get_str($server, 'name')->limit(10) }} > Docker Cleanup | Coolify
+        {{ data_get_str($server, 'name')->limit(10) }} > Docker Cleanup | Code X Hosting
     </x-slot>
 
     <livewire:server.navbar :server="$server" />
@@ -22,9 +22,9 @@
                             <x-modal-confirmation title="Confirm Docker Cleanup?"
                                 buttonTitle="Run cleanup" isHighlightedButton submitAction="manualCleanup"
                                 :actions="[
-                                    'Deletes stopped containers managed by Coolify.',
+                                    'Deletes stopped containers managed by Code X Hosting.',
                                     'Deletes unused images and clears the build cache.',
-                                    'Removes old Coolify helper images.',
+                                    'Removes old Code X Hosting helper images.',
                                     'May delete unused volumes or networks when those options are enabled.',
                                 ]" :confirmWithText="false" :confirmWithPassword="false"
                                 step2ButtonText="Run Docker Cleanup" />
@@ -39,7 +39,7 @@
                             @endif
                             Run
                             <code class="rounded bg-black/10 px-1 dark:bg-white/10">php artisan cleanup:redis --clear-locks</code>
-                            on the Coolify instance to clear stale locks.
+                            on the Code X Hosting instance to clear stale locks.
                         </x-callout>
                     @else
                         <div class="flex items-start gap-3">

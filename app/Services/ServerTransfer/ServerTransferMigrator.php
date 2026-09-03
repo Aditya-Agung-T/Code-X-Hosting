@@ -38,7 +38,7 @@ class ServerTransferMigrator
         bool $adoptMode = true,
     ): array {
         if ($server->id === 0) {
-            throw new RuntimeException('The Coolify host (localhost) cannot be transferred between instances.');
+            throw new RuntimeException('The Code X Hosting host (localhost) cannot be transferred between instances.');
         }
 
         $targetUrl = $this->normalizeTargetUrl($targetUrl);

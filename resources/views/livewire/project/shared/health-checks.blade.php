@@ -6,7 +6,7 @@
     <x-unsaved-bar action="submit" />
 
     <x-application.settings-section id="healthcheck-configuration-section" title="Healthcheck"
-        helper="Define how Coolify determines whether this application is ready to receive traffic.">
+        helper="Define how Code X Hosting determines whether this application is ready to receive traffic.">
         <x-slot:actions>
             @if (!$healthCheckEnabled)
                 <x-modal-confirmation :disabled="!auth()->user()->can('update', $resource)"
@@ -42,7 +42,7 @@
 
     @if ($healthCheckType === 'http')
         <x-application.settings-section id="healthcheck-request-section" title="HTTP request"
-            helper="Coolify sends this request from inside the container and evaluates the response.">
+            helper="Code X Hosting sends this request from inside the container and evaluates the response.">
             <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <x-forms.listbox id="healthCheckMethod" label="Method" required :options="[
                     ['value' => 'GET', 'label' => 'GET'],

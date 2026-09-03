@@ -1,5 +1,5 @@
 <div>
-    <x-slot:title>Admin | Coolify</x-slot>
+    <x-slot:title>Admin | Code X Hosting</x-slot>
     <div class="mt-8 flex w-full max-w-none flex-col gap-6 lg:mt-3">
         <section class="grid gap-3 sm:grid-cols-3">
             <div class="rounded-[10px] border border-neutral-200 bg-white p-4 dark:border-white/[0.07] dark:bg-surface">
@@ -28,7 +28,7 @@
         @if (session('impersonating'))
             <x-callout type="warning" title="Impersonation is active">
                 <div class="flex flex-wrap items-center justify-between gap-3">
-                    <span>You are viewing Coolify as {{ auth()->user()->name }}.</span>
+                    <span>You are viewing Code X Hosting as {{ auth()->user()->name }}.</span>
                     <x-forms.button wire:click="back">Return to root user</x-forms.button>
                 </div>
             </x-callout>

@@ -265,7 +265,7 @@
                                             <form class="flex w-full flex-col gap-4"
                                                 wire:submit='submitHostFileStorage'>
                                                 <p class="text-[13px] leading-5 text-neutral-500 dark:text-fg-dim">
-                                                    Bind an existing host file into the container. Coolify will not modify
+                                                    Bind an existing host file into the container. Code X Hosting will not modify
                                                     or delete the source file.
                                                 </p>
                                                 <div class="flex flex-col gap-4">

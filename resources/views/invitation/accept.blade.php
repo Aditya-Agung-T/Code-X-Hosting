@@ -1,9 +1,9 @@
 <x-layout-simple>
-    <x-auth.shell title="Coolify" description="Review your invitation to join a team.">
+    <x-auth.shell title="Code X Hosting" description="Review your invitation to join a team.">
         <div class="flex flex-col gap-4">
             <div class="auth-guidance">
                 <x-reicon name="teams" class="mt-0.5 size-4 shrink-0" />
-                <p>You have been invited to collaborate on Coolify.</p>
+                <p>You have been invited to collaborate on Code X Hosting.</p>
             </div>
 
             <dl class="divide-y divide-neutral-200 rounded-lg border border-neutral-200 text-sm dark:divide-white/10 dark:border-white/10">

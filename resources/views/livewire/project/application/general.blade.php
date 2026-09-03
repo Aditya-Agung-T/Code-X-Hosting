@@ -9,7 +9,7 @@
         <x-unsaved-bar action="submit"
             targets="name,description,buildPack,staticImage,baseDirectory,dockerComposeLocation,dockerComposeCustomBuildCommand,dockerComposeCustomStartCommand,watchPaths,dockerfileLocation,dockerfileTargetBuild,publishDirectory,installCommand,buildCommand,startCommand,customNginxConfiguration,dockerfile,dockerRegistryImageName,dockerRegistryImageTag,portsExposes,portsMappings,customNetworkAliases,customDockerRunOptions,httpBasicAuthUsername,httpBasicAuthPassword,preDeploymentCommand,preDeploymentCommandContainer,postDeploymentCommand,postDeploymentCommandContainer,isContainerLabelReadonlyEnabled,isContainerLabelEscapeEnabled,customLabels" />
         <div class="application-settings-grid flex flex-col gap-6">
-            <x-application.settings-section id="application-details-section" title="Application details" helper="Name the application and choose the build strategy Coolify should use to deploy it." class="application-details-card">
+            <x-application.settings-section id="application-details-section" title="Application details" helper="Name the application and choose the build strategy Code X Hosting should use to deploy it." class="application-details-card">
             @if ($buildPack === 'dockercompose')
                 <x-slot:actions>
                     <x-forms.button canGate="update" :canResource="$application" wire:target='initLoadingCompose'
@@ -268,7 +268,7 @@
                                 <div class="grid gap-4 pt-2 sm:grid-cols-2">
                                     <x-forms.listbox id="isBuildServerEnabled" label="Builder selection"
                                         onChange="instantSave" :options="$buildServerOptions"
-                                        helper="Build your application on a dedicated build server. If several build servers are connected, Coolify picks an available one automatically. More info in the <a href='https://coolify.io/docs/knowledge-base/server/build-server' class='underline' target='_blank'>documentation</a>."
+                                        helper="Build your application on a dedicated build server. If several build servers are connected, Code X Hosting picks an available one automatically. More info in the <a href='https://coolify.io/docs/knowledge-base/server/build-server' class='underline' target='_blank'>documentation</a>."
                                         x-bind:disabled="!canUpdate" />
                                 </div>
                             @endif
@@ -335,7 +335,7 @@
                             id="isContainerLabelEscapeEnabled" instantSave
                             x-bind:disabled="!canUpdate"></x-forms.checkbox>
                         {{-- <x-forms.checkbox label="Readonly labels"
-                            helper="Labels are readonly by default. Readonly means that edits you do to the labels could be lost and Coolify will autogenerate the labels for you. If you want to edit the labels directly, disable this option. <br><br>Be careful, it could break the proxy configuration after you restart the container as Coolify will now NOT autogenerate the labels for you (ofc you can always reset the labels to the coolify defaults manually)."
+                            helper="Labels are readonly by default. Readonly means that edits you do to the labels could be lost and Code X Hosting will autogenerate the labels for you. If you want to edit the labels directly, disable this option. <br><br>Be careful, it could break the proxy configuration after you restart the container as Code X Hosting will now NOT autogenerate the labels for you (ofc you can always reset the labels to the coolify defaults manually)."
                             id="isContainerLabelReadonlyEnabled" instantSave></x-forms.checkbox> --}}
                     </div>
                 </div>
@@ -474,12 +474,12 @@
                                 x-bind:disabled="!canUpdate" />
                         @endif
                     @endif
-                    @if (!$application->destination->server->isSwarm())
+                    @if (!$application->destination->server->isSwarm() && auth()->user()?->isInstanceAdmin())
                         <x-forms.input placeholder="3000:3000" id="portsMappings" label="Port mappings"
                             helper="A comma separated list of ports you would like to map to the host system. Useful when you do not want to use domains.<br><br><span class='inline-block font-bold dark:text-warning'>Format:</span> host:container<br><br><span class='inline-block font-bold dark:text-warning'>Example:</span> 3000:3000,3002:3002<br><br>Rolling update is not supported if you have a port mapped to the host."
                             x-bind:disabled="!canUpdate" />
                     @endif
-                    @if (!$application->destination->server->isSwarm())
+                    @if (!$application->destination->server->isSwarm() && auth()->user()?->isInstanceAdmin())
                         <x-forms.input id="customNetworkAliases" label="Network aliases"
                             helper="A comma separated list of custom network aliases you would like to add for container in Docker network.<br><br><span class='inline-block font-bold dark:text-warning'>Example:</span><br>api.internal,api.local"
                             wire:model="customNetworkAliases" x-bind:disabled="!canUpdate" />
@@ -487,17 +487,19 @@
                 </div>
                 </x-application.settings-section>
 
+                @if (auth()->user()?->isInstanceAdmin())
                 <x-application.settings-section id="runtime-section" title="Runtime" helper="Options applied to the container when it starts.">
                     <x-forms.input
-                        helper="You can add custom docker run options that will be used when your container is started.<br>Note: Not all options are supported, as they could mess up Coolify's automation and could cause bad experience for users.<br><br>Check the <a class='underline dark:text-white' href='https://coolify.io/docs/knowledge-base/docker/custom-commands'>docs.</a>"
+                        helper="You can add custom docker run options that will be used when your container is started.<br>Note: Not all options are supported, as they could mess up Code X Hosting's automation and could cause bad experience for users.<br><br>Check the <a class='underline dark:text-white' href='https://coolify.io/docs/knowledge-base/docker/custom-commands'>docs.</a>"
                         placeholder="--cap-add SYS_ADMIN --device=/dev/fuse --security-opt apparmor:unconfined --ulimit nofile=1024:1024 --tmpfs /run:rw,noexec,nosuid,size=65536k --hostname=myapp"
                         id="customDockerRunOptions" label="Custom Docker options" x-bind:disabled="!canUpdate" />
                 </x-application.settings-section>
+                @endif
 
                 <x-application.settings-section id="security-section" title="Security" helper="Protect this application with authentication at the proxy level.">
                     @if ($application->settings->is_container_label_readonly_enabled == false)
                     <x-empty size="sm" title="Authentication is managed through labels"
-                        description="Authentication is managed via manual proxy labels. Switch label management back to Coolify to configure it here."
+                        description="Authentication is managed via manual proxy labels. Switch label management back to Code X Hosting to configure it here."
                         icon-name="admin">
                         <x-slot:contents>
                             <button type="button" class="button"
@@ -508,7 +510,7 @@
                     </x-empty>
                     @else
                     <x-forms.listbox id="isHttpBasicAuthEnabled" label="Authentication" onChange="instantSave"
-                        helper="HTTP Basic Authentication adds the required authentication labels to the proxy. Coolify currently supports a single username and password."
+                        helper="HTTP Basic Authentication adds the required authentication labels to the proxy. Code X Hosting currently supports a single username and password."
                         :options="[
                             ['value' => false, 'label' => 'None'],
                             ['value' => true, 'label' => 'HTTP Basic Authentication'],
@@ -555,9 +557,9 @@
                 <div class="grid w-full gap-4 sm:grid-cols-2">
                     <x-forms.listbox id="isContainerLabelReadonlyEnabled" label="Label management"
                         onChange="instantSave"
-                        helper="When Coolify manages the labels, they are regenerated automatically and manual edits can be lost.<br><br>If you edit them yourself, be careful: a wrong label set can break the proxy configuration after a restart (you can always reset to the Coolify defaults)."
+                        helper="When Code X Hosting manages the labels, they are regenerated automatically and manual edits can be lost.<br><br>If you edit them yourself, be careful: a wrong label set can break the proxy configuration after a restart (you can always reset to the Code X Hosting defaults)."
                         :options="[
-                            ['value' => true, 'label' => 'Managed by Coolify (auto-generated)'],
+                            ['value' => true, 'label' => 'Managed by Code X Hosting (auto-generated)'],
                             ['value' => false, 'label' => 'Managed manually (edit labels yourself)'],
                         ]" x-bind:disabled="!canUpdate" />
                     <x-forms.listbox id="isContainerLabelEscapeEnabled" label="Special characters"
@@ -572,7 +574,7 @@
                     <div class="mb-1.5 flex items-center justify-between gap-3">
                         <label class="flex w-fit items-center gap-1.5" style="margin-bottom: 0">Active labels</label>
                         @can('update', $application)
-                            <x-modal-confirmation title="Confirm Labels Reset to Coolify Defaults?"
+                            <x-modal-confirmation title="Confirm Labels Reset to Code X Hosting Defaults?"
                                 buttonTitle="Reset to defaults" submitAction="resetDefaultLabels(true)"
                                 :actions="[
                                     'All your custom proxy labels will be lost.',

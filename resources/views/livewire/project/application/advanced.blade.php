@@ -21,7 +21,7 @@
                         ['value' => true, 'label' => 'Rebuild from scratch every time'],
                     ]" :disabled="! $canUpdate" />
                 <x-forms.listbox id="injectBuildArgsToDockerfile" label="Build arguments" onChange="instantSave"
-                    helper="When injected automatically, Coolify adds ARG statements to your Dockerfile for build-time variables. Manage them manually to preserve Docker build cache."
+                    helper="When injected automatically, Code X Hosting adds ARG statements to your Dockerfile for build-time variables. Manage them manually to preserve Docker build cache."
                     :options="[
                         ['value' => true, 'label' => 'Inject build args automatically'],
                         ['value' => false, 'label' => 'Managed manually in Dockerfile'],
@@ -108,13 +108,13 @@
                 helper="Advanced behavior for compose-based deployments.">
                 <div class="grid w-full gap-4 sm:grid-cols-2">
                     <x-forms.listbox id="isRawComposeDeploymentEnabled" label="Compose deployment" onChange="instantSave"
-                        helper="WARNING: Advanced use cases only. In raw mode your compose file is deployed as-is. Nothing is modified by Coolify and you need to configure the proxy parts. More info in the <a class='underline dark:text-white' href='https://coolify.io/docs/knowledge-base/docker/compose#raw-docker-compose-deployment'>documentation</a>."
+                        helper="WARNING: Advanced use cases only. In raw mode your compose file is deployed as-is. Nothing is modified by Code X Hosting and you need to configure the proxy parts. More info in the <a class='underline dark:text-white' href='https://coolify.io/docs/knowledge-base/docker/compose#raw-docker-compose-deployment'>documentation</a>."
                         :options="[
-                            ['value' => false, 'label' => 'Managed by Coolify'],
+                            ['value' => false, 'label' => 'Managed by Code X Hosting'],
                             ['value' => true, 'label' => 'Raw (deploy file as-is)'],
                         ]" :disabled="! $canUpdate" />
                     <x-forms.listbox id="isConnectToDockerNetworkEnabled" label="Predefined network" onChange="instantSave"
-                        helper="By default a compose resource only gets its own internal network. Connecting to a Coolify predefined network may require different internal DNS names. More info <a class='underline dark:text-white' target='_blank' href='https://coolify.io/docs/knowledge-base/docker/compose#connect-to-predefined-networks'>here</a>."
+                        helper="By default a compose resource only gets its own internal network. Connecting to a Code X Hosting predefined network may require different internal DNS names. More info <a class='underline dark:text-white' target='_blank' href='https://coolify.io/docs/knowledge-base/docker/compose#connect-to-predefined-networks'>here</a>."
                         :options="[
                             ['value' => false, 'label' => 'Isolated network only'],
                             ['value' => true, 'label' => 'Connect to predefined network'],
@@ -142,7 +142,7 @@
                 </div>
             @else
                 <x-empty size="sm" title="Proxy behavior is managed through labels"
-                    description="Container labels are managed manually for this application. Switch label management back to Coolify to configure the proxy here."
+                    description="Container labels are managed manually for this application. Switch label management back to Code X Hosting to configure the proxy here."
                     icon-name="globe">
                     <x-slot:contents>
                         <a class="button"
@@ -165,7 +165,7 @@
                     canGate="update" :canResource="$application" />
                 <x-forms.input type="number" min="0" id="maxRestartCount" label="Max restart count"
                     wire:change="saveMaxRestartCount"
-                    helper="Maximum number of crash restarts before Coolify automatically stops the application and sends a notification. Saved automatically. Set to 0 to disable the limit."
+                    helper="Maximum number of crash restarts before Code X Hosting automatically stops the application and sends a notification. Saved automatically. Set to 0 to disable the limit."
                     canGate="update" :canResource="$application" />
             </div>
         </x-application.settings-section>

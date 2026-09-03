@@ -28,7 +28,7 @@ class ServerTransferClaimer
     public function claim(Server $server, bool $writeRemote = true, bool $rebindSentinel = true): array
     {
         if ($server->id === 0) {
-            throw new RuntimeException('Cannot claim the Coolify host itself.');
+            throw new RuntimeException('Cannot claim the Code X Hosting host itself.');
         }
 
         $instanceUrl = rtrim((string) (instanceSettings()->fqdn ?: config('app.url')), '/');
@@ -90,7 +90,7 @@ class ServerTransferClaimer
         $result['claim_written'] = $claimWritten;
         $result['message'] = $claimWritten
             ? 'Server claimed. Ownership file written and Sentinel rebound to this instance.'
-            : 'Server claimed in Coolify. Remote ownership file was not written (SSH unavailable or skipped).';
+            : 'Server claimed in Code X Hosting. Remote ownership file was not written (SSH unavailable or skipped).';
 
         return $result;
     }
@@ -107,7 +107,7 @@ class ServerTransferClaimer
     public function markTransferred(Server $server, ?string $exportId = null, ?string $targetInstanceUrl = null): array
     {
         if ($server->id === 0) {
-            throw new RuntimeException('Cannot transfer the Coolify host itself.');
+            throw new RuntimeException('Cannot transfer the Code X Hosting host itself.');
         }
 
         $result = DB::transaction(function () use ($server, $exportId, $targetInstanceUrl) {

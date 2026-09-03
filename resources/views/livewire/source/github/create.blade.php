@@ -15,7 +15,7 @@
             <div x-data="{ showWarning: @entangle('is_system_wide') }">
                 <div class="max-w-xs">
                     <x-forms.checkbox id="is_system_wide" label="System wide"
-                        helper="If checked, this GitHub App will be available for everyone in this Coolify instance." />
+                        helper="If checked, this GitHub App will be available for everyone in this Code X Hosting instance." />
                 </div>
                 <div x-cloak x-show="showWarning" x-transition class="mt-3">
                     <x-callout type="warning" title="Shared with every team">

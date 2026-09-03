@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        Keys & Tokens | Coolify
+        Keys & Tokens | Code X Hosting
     </x-slot>
 
     <x-security.settings-layout>
@@ -64,7 +64,7 @@
 
     @if ($privateKeys->isEmpty())
         <x-empty title="No private keys yet"
-            description="Generate or add an SSH key to connect Coolify to servers and private repositories."
+            description="Generate or add an SSH key to connect Code X Hosting to servers and private repositories."
             icon-name="keys" />
     @else
         <div>

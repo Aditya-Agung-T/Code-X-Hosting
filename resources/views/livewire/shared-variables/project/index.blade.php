@@ -1,5 +1,5 @@
 <div>
-    <x-slot:title>Project Variables | Coolify</x-slot>
+    <x-slot:title>Project Variables | Code X Hosting</x-slot>
 
     <x-shared-variables.layout>
         <div class="w-full" x-data="{

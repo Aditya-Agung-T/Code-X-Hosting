@@ -8,7 +8,7 @@
                 </div>
             </div>
             <x-empty title="No GitHub Apps"
-                description="Create an app to grant Coolify access to selected repositories."
+                description="Create an app to grant Code X Hosting access to selected repositories."
                 icon-name="sources">
                 <x-slot:contents>
                     <x-modal-input buttonTitle="+ Add GitHub App" title="New GitHub App" closeOutside="false">

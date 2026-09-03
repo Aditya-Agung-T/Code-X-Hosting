@@ -1,7 +1,7 @@
 <form wire:submit="submit" class="application-settings-form flex flex-col">
     <x-unsaved-bar action="submit" />
     <x-application.settings-section id="preview-template-section" title="Preview URL template"
-        helper="Define how Coolify generates domains for pull request deployments.">
+        helper="Define how Code X Hosting generates domains for pull request deployments.">
         <x-slot:actions>
             @can('update', $application)
                 <x-forms.button type="button" wire:click="resetToDefault">

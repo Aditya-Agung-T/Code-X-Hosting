@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        Authentication | Coolify
+        Authentication | Code X Hosting
     </x-slot>
 
     <x-settings.layout>

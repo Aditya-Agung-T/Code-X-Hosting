@@ -351,7 +351,7 @@ class ServerTransferImporter
                     $result['claimed'] = true;
                     $result['claim'] = $claimResult;
                     if (! data_get($claimResult, 'claim_written') && $writeRemote) {
-                        $result['warnings'][] = 'Server imported and claimed in Coolify, but the remote ownership file was not written (SSH unavailable).';
+                        $result['warnings'][] = 'Server imported and claimed in Code X Hosting, but the remote ownership file was not written (SSH unavailable).';
                     }
                 } catch (Throwable $e) {
                     $result['claimed'] = false;

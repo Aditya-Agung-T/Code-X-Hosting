@@ -6,7 +6,7 @@
 ])
 
 <x-application.settings-section title="{{ $providerLabel }} account"
-    description="Choose the cloud credential Coolify should use for this server." flush>
+    description="Choose the cloud credential Code X Hosting should use for this server." flush>
     @if ($tokens->isEmpty())
         <x-empty title="No {{ $providerLabel }} tokens"
             description="Add an API token to continue provisioning." icon-name="keys" size="sm">

@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        Transactional Email | Coolify
+        Transactional Email | Code X Hosting
     </x-slot>
 
     <x-settings.layout>

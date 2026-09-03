@@ -9,7 +9,7 @@
             </div>
             <div class="application-settings-section-body">
                 <x-empty title="No GitLab Apps"
-                    description="Create an app to grant Coolify access to selected repositories."
+                    description="Create an app to grant Code X Hosting access to selected repositories."
                     icon-name="sources">
                     <x-slot:contents>
                         <x-modal-input buttonTitle="+ Add GitLab App" title="New GitLab App" closeOutside="false">

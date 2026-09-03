@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        {{ data_get_str($server, 'name')->limit(10) }} > Destinations | Coolify
+        {{ data_get_str($server, 'name')->limit(10) }} > Destinations | Code X Hosting
     </x-slot>
 
     <livewire:server.navbar :server="$server" />
@@ -53,7 +53,7 @@
 
                 @if ($networks->count() > 0)
                     <x-application.settings-section id="server-found-networks-section" title="Discovered networks"
-                        helper="Networks found on the server that are not registered as Coolify destinations."
+                        helper="Networks found on the server that are not registered as Code X Hosting destinations."
                         flush>
                         @foreach ($networks as $network)
                             <div

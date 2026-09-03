@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        Cloud-Init Scripts | Coolify
+        Cloud-Init Scripts | Code X Hosting
     </x-slot>
 
     <x-security.settings-layout>

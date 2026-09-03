@@ -1250,6 +1250,10 @@ function convertDockerRunToCompose(?string $custom_docker_run_options = null)
         '--hostname' => 'hostname',
         '--entrypoint' => 'entrypoint',
     ]);
+    // Enforce shared hosting restrictions for non-instance admins
+    if (! (auth()->check() && auth()->user()->isInstanceAdmin())) {
+        $mapping->forget(['--cap-add', '--device', '--privileged', '--security-opt']);
+    }
     foreach ($matches as $match) {
         $option = $match[1];
         if ($option === '--gpus') {

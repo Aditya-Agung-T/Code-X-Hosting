@@ -20,7 +20,7 @@ class InstallDocker
 
         if (! $server->sslCertificates()->where('is_ca_certificate', true)->exists()) {
             $serverCert = SslHelper::generateSslCertificate(
-                commonName: 'Coolify CA Certificate',
+                commonName: 'Code X Hosting CA Certificate',
                 serverId: $server->id,
                 isCaCertificate: true,
                 validityDays: 10 * 365

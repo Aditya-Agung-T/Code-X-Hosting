@@ -149,4 +149,25 @@ return [
         //   - 2000 servers: 300s (hits maximum)
         'notification_delay_scaling' => 0.2,
     ],
+
+    'hosting' => [
+        // Allow customers to deploy on the admin's shared host server (Server ID 0 / localhost)
+        'shared_server_enabled' => env('SHARED_SERVER_HOSTING_ENABLED', true),
+
+        // Default resource limits applied to customer applications on creation
+        'default_limits_memory' => env('DEFAULT_HOSTING_MEMORY_LIMIT', '512m'),
+        'default_limits_cpus' => env('DEFAULT_HOSTING_CPU_LIMIT', '1.0'),
+        'default_limits_memory_swap' => env('DEFAULT_HOSTING_MEMORY_SWAP', '0'),
+        'default_limits_memory_reservation' => env('DEFAULT_HOSTING_MEMORY_RESERVATION', '256m'),
+
+        // Whether non-admin customers can edit resource limits directly from the UI
+        'customer_can_change_limits' => env('CUSTOMER_CAN_CHANGE_LIMITS', false),
+
+        // Maximum number of active resources (applications, services, databases) per customer team
+        // Set to 0 for unlimited
+        'max_resources_per_team' => (int) env('MAX_RESOURCES_PER_TEAM', 2),
+
+        // Default maximum processes (PIDs limit) per container to prevent fork bombs
+        'default_pids_limit' => (int) env('DEFAULT_HOSTING_PIDS_LIMIT', 100),
+    ],
 ];

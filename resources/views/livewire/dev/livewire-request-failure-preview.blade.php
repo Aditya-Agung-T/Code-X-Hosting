@@ -4,7 +4,7 @@
         <h1 class="text-2xl font-semibold text-neutral-950 dark:text-white">Livewire request failure preview</h1>
         <p class="text-sm leading-6 text-neutral-600 dark:text-fg-dim">
             Each button returns proxy-style HTML from a failed Livewire request. The page should remain visible and
-            Coolify should show a toast instead of Livewire's raw response modal.
+            Code X Hosting should show a toast instead of Livewire's raw response modal.
         </p>
     </div>
 

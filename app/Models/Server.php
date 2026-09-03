@@ -521,7 +521,19 @@ class Server extends BaseModel
 
     private static function usableByBuildServerStatus(bool $isBuildServer): Builder
     {
-        return Server::ownedByCurrentTeam()
+        $query = Server::query();
+        if (config('constants.hosting.shared_server_enabled', true)) {
+            $teamId = currentTeam()?->id ?? 0;
+            $query->where(function ($q) use ($teamId) {
+                $q->where('team_id', $teamId)
+                    ->orWhere('id', 0)
+                    ->orWhere('team_id', 0);
+            });
+        } else {
+            $query = Server::ownedByCurrentTeam();
+        }
+
+        return $query
             ->whereRelation('settings', 'is_reachable', true)
             ->whereRelation('settings', 'is_usable', true)
             ->whereRelation('settings', 'is_swarm_worker', false)

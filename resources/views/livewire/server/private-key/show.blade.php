@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        {{ data_get_str($server, 'name')->limit(10) }} > Private Key | Coolify
+        {{ data_get_str($server, 'name')->limit(10) }} > Private Key | Code X Hosting
     </x-slot>
 
     <livewire:server.navbar :server="$server" />
@@ -11,7 +11,7 @@
 
         <div class="application-settings-form flex w-full flex-col gap-6">
             <x-application.settings-section id="server-private-keys-section" title="Private key"
-                helper="Choose the SSH key Coolify uses to connect to this server." flush>
+                helper="Choose the SSH key Code X Hosting uses to connect to this server." flush>
                 <x-slot:actions>
                     <div class="flex items-center gap-2">
                         <x-forms.button canGate="update" :canResource="$server"

@@ -82,7 +82,7 @@ class Select extends Component
                 $this->type = $queryType;
                 $this->server_id = $queryServerId;
                 $this->destination_uuid = $queryDestination;
-                $this->server = Server::ownedByCurrentTeam()->find($queryServerId);
+                $this->server = Server::isUsable()->find($queryServerId) ?? Server::ownedByCurrentTeam()->find($queryServerId);
                 $this->current_step = 'select-postgresql-type';
             }
         } catch (\Exception $e) {
@@ -154,7 +154,7 @@ class Select extends Component
             [
                 'id' => 'public',
                 'name' => 'Public Git Repository',
-                'description' => 'Deploy any public Git repository. Coolify builds it from source, no credentials required.',
+                'description' => 'Deploy any public Git repository. Code X Hosting builds it from source, no credentials required.',
                 'documentation' => 'https://coolify.io/docs/applications/ci-cd',
                 'logo' => asset('svgs/resources/public-repo.svg'),
             ],

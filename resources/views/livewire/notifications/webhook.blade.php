@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        Webhook Notifications | Coolify
+        Webhook Notifications | Code X Hosting
     </x-slot>
 
     <x-notification.settings-layout>
@@ -18,7 +18,7 @@
                     <div class="lg:col-span-2">
                         @can('update', $settings)
                             <x-forms.input type="password" required id="webhookUrl" label="Webhook URL"
-                                helper="Coolify sends POST requests to this HTTP or HTTPS endpoint." />
+                                helper="Code X Hosting sends POST requests to this HTTP or HTTPS endpoint." />
                         @else
                             <x-forms.input disabled label="Webhook URL" value="Hidden (only admins can view)" />
                         @endcan

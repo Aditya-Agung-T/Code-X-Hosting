@@ -1,13 +1,13 @@
 @php use App\Enums\ProxyTypes; @endphp
 <x-slot:title>
-    Onboarding | Coolify
+    Onboarding | Code X Hosting
     </x-slot>
     <section class="application-settings-form w-full py-6">
         <div class="flex w-full flex-col items-center space-y-6">
             @if ($currentState === 'welcome')
                 <div class="w-full max-w-3xl">
                     <div class="mb-6 text-center">
-                        <h1 class="text-2xl! font-semibold!">Welcome to Coolify</h1>
+                        <h1 class="text-2xl! font-semibold!">Welcome to Code X Hosting</h1>
                         <p class="mt-1 text-[13px] text-neutral-500 dark:text-fg-dim">
                             Connect your first server and start deploying in minutes.
                         </p>
@@ -63,12 +63,12 @@
                 <x-boarding-progress :currentStep="0" />
                 <x-boarding-step title="Platform Overview">
                     <x-slot:question>
-                        Coolify automates deployment and infrastructure management on your own servers. Deploy applications
+                        Code X Hosting automates deployment and infrastructure management on your own servers. Deploy applications
                         from Git, manage databases, and monitor everything without vendor lock-in.
                     </x-slot:question>
                     <x-slot:explanation>
                         <p>
-                            <x-highlighted text="Automation:" /> Coolify handles server configuration, Docker management,
+                            <x-highlighted text="Automation:" /> Code X Hosting handles server configuration, Docker management,
                             and
                             deployments automatically.
                         </p>
@@ -104,7 +104,7 @@
                                 class="group relative cursor-pointer min-h-36 rounded-[10px] border border-neutral-200 bg-white p-4 text-left shadow-sm transition-all hover:-translate-y-px hover:border-neutral-300 hover:shadow-md dark:border-white/[0.08] dark:bg-white/[0.025] dark:hover:border-white/[0.14]"
                                 wire:target="setServerType('localhost')" wire:click="setServerType('localhost')">
                                 <span role="button" tabindex="0" aria-label="About this machine"
-                                    data-tooltip="The machine running Coolify. Not recommended for production workloads due to resource contention."
+                                    data-tooltip="The machine running Code X Hosting. Not recommended for production workloads due to resource contention."
                                     @click.stop @keydown.enter.stop @keydown.space.prevent.stop
                                     class="absolute top-3 right-3 flex size-6 items-center justify-center rounded-full border border-neutral-200 text-[11px] font-semibold text-neutral-500 hover:border-coollabs/35 hover:text-coollabs dark:border-white/[0.1] dark:text-fg-dim dark:hover:border-warning/30 dark:hover:text-warning">i</span>
                                 <div class="flex flex-col gap-4 text-left">
@@ -116,7 +116,7 @@
                                     <div>
                                         <h3 class="mb-1 text-[14px] font-semibold">This machine</h3>
                                         <p class="text-sm dark:text-neutral-400">
-                                            Deploy on the server running Coolify. Best for testing and single-server setups.
+                                            Deploy on the server running Code X Hosting. Best for testing and single-server setups.
                                         </p>
                                     </div>
                                 </div>
@@ -239,7 +239,7 @@
                                         <li>The correct public key is in your <code
                                                 class="bg-red-200 dark:bg-red-900 px-1 rounded-sm">~/.ssh/authorized_keys</code>
                                             file for the specified user</li>
-                                        <li>Or skip the boarding process and manually add a new private key to Coolify and
+                                        <li>Or skip the boarding process and manually add a new private key to Code X Hosting and
                                             the server</li>
                                     </ul>
                                 </div>
@@ -327,7 +327,7 @@
                                 <span class="min-w-0">
                                     <span class="block text-[13px] font-semibold">Generate new key</span>
                                     <span class="mt-0.5 block text-[12px] leading-5 text-neutral-500 dark:text-fg-dim">
-                                        Create an ED25519 key pair in Coolify.
+                                        Create an ED25519 key pair in Code X Hosting.
                                     </span>
                                 </span>
                             </button>
@@ -345,7 +345,7 @@
                             file.
                         </p>
                         <p>
-                            <x-highlighted text="Key Generation:" /> Coolify generates ED25519 keys by default for optimal
+                            <x-highlighted text="Key Generation:" /> Code X Hosting generates ED25519 keys by default for optimal
                             security and performance.
                         </p>
                     </x-slot:explanation>
@@ -395,7 +395,7 @@
                     </x-slot:actions>
                     <x-slot:explanation>
                         <p>
-                            <x-highlighted text="Key Storage:" /> Private keys are encrypted at rest in Coolify's database.
+                            <x-highlighted text="Key Storage:" /> Private keys are encrypted at rest in Code X Hosting's database.
                         </p>
                         <p>
                             <x-highlighted text="Public Key Distribution:" /> Deploy the public key to
@@ -443,7 +443,7 @@
                 <x-boarding-progress :currentStep="2" />
                 <x-boarding-step title="Server Validation">
                     <x-slot:question>
-                        Coolify will automatically install Docker {{ $minDockerVersion }}+ if not present.
+                        Code X Hosting will automatically install Docker {{ $minDockerVersion }}+ if not present.
                     </x-slot:question>
                     <x-slot:actions>
                         <div class="flex w-full flex-col gap-4">
@@ -498,7 +498,7 @@
                     </x-slot:actions>
                     <x-slot:explanation>
                         <p>
-                            <x-highlighted text="Automated Setup:" /> Coolify installs Docker Engine, Docker Compose, and
+                            <x-highlighted text="Automated Setup:" /> Code X Hosting installs Docker Engine, Docker Compose, and
                             configures system requirements automatically.
                         </p>
                         <p>

@@ -37,7 +37,7 @@
                         if (checkNumber > 5) {
                             this.popups.realtime = true;
                             console.error(
-                                'Coolify could not connect to its real-time service. This will cause unusual problems on the UI if not fixed! Please check the related documentation (https://coolify.io/docs/knowledge-base/cloudflare/tunnels/overview) or get help on Discord (https://coollabs.io/discord).)'
+                                'Code X Hosting could not connect to its real-time service. This will cause unusual problems on the UI if not fixed! Please check the related documentation (https://coolify.io/docs/knowledge-base/cloudflare/tunnels/overview) or get help on Discord (https://coollabs.io/discord).)'
                             );
                         }
 
@@ -160,11 +160,11 @@
                             </div>
                             <div class="min-w-0">
                                 <h2 class="text-[15px]! leading-5! font-semibold! text-black dark:text-fg">
-                                    Love Coolify? Support our work.
+                                    Love Code X Hosting? Support our work.
                                 </h2>
                                 <p x-show="!reminders.sponsorship.compact" x-transition.opacity
                                     class="mt-1 text-[12px] leading-5 text-neutral-500 dark:text-fg-dim">
-                                    Coolify is profitable thanks to <span
+                                    Code X Hosting is profitable thanks to <span
                                         class="font-semibold text-coollabs dark:text-warning">you</span>. Your support
                                     helps us build more features and keep improving the project.
                                 </p>

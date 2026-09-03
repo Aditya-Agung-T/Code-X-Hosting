@@ -4,7 +4,7 @@
             <div class="application-settings-section-header">
                 <div>
                     <h2>Private repository</h2>
-                    <p>Choose the SSH key Coolify will use to clone this repository.</p>
+                    <p>Choose the SSH key Code X Hosting will use to clone this repository.</p>
                 </div>
             </div>
             <div class="application-settings-section-body p-0!">
@@ -46,7 +46,7 @@
                 <div class="application-settings-section-header">
                     <div>
                         <h2>Repository configuration</h2>
-                        <p>Enter the repository location and choose how Coolify should build it.</p>
+                        <p>Enter the repository location and choose how Code X Hosting should build it.</p>
                     </div>
                     <x-forms.button type="submit" isHighlighted>Continue</x-forms.button>
                 </div>

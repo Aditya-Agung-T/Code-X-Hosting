@@ -22,7 +22,7 @@ trait InteractsWithCloudflareDomainConnect
         $this->authorizeUpdateForDomainConnect();
 
         if (! $this->domainConnectAvailable()) {
-            $this->dispatch('error', 'Automated DNS configuration is only available on Coolify Cloud when Domain Connect is configured.');
+            $this->dispatch('error', 'Automated DNS configuration is only available on Code X Hosting Cloud when Domain Connect is configured.');
 
             return;
         }
@@ -50,7 +50,7 @@ trait InteractsWithCloudflareDomainConnect
         if (! $domainConnect->isAvailable()) {
             $this->dispatch(
                 'error',
-                'Automated DNS configuration is only available on Coolify Cloud when a Domain Connect private key is configured.'
+                'Automated DNS configuration is only available on Code X Hosting Cloud when a Domain Connect private key is configured.'
             );
 
             return;

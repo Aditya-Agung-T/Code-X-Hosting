@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        Environment Variables | Coolify
+        Environment Variables | Code X Hosting
     </x-slot>
 
     <x-shared-variables.editor :resource="$environment"

@@ -18,7 +18,7 @@
 
         @if (!$healthCheckEnabled)
             <x-callout type="warning" title="Healthcheck disabled">
-                Docker is not running a healthcheck probe, so Coolify cannot report a healthy or unhealthy state.
+                Docker is not running a healthcheck probe, so Code X Hosting cannot report a healthy or unhealthy state.
             </x-callout>
         @endif
 

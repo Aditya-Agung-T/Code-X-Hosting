@@ -158,7 +158,7 @@
             'active' => $activeMenu === 'danger',
             'icon' => 'shield-alert',
             'group' => 'Danger zone',
-            // Coolify host (id 0) cannot be deleted. Other servers may still use
+            // Code X Hosting host (id 0) cannot be deleted. Other servers may still use
             // host.docker.internal (e.g. Lima VMs) and must keep the Danger menu.
             'visible' => ! $server->is_coolify_host,
         ],

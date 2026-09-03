@@ -26,7 +26,7 @@
                     <ul class="mt-3 space-y-1 text-xs text-neutral-500 dark:text-fg-dim">
                         <li>• Active deployments will be stopped.</li>
                         <li>• Selected volumes and stored data may be permanently removed.</li>
-                        <li>• This {{ $resourceLabel }} cannot be restored from Coolify after deletion.</li>
+                        <li>• This {{ $resourceLabel }} cannot be restored from Code X Hosting after deletion.</li>
                     </ul>
                 </div>
 

@@ -47,7 +47,7 @@
                     <div>
                         <p class="text-sm font-medium text-neutral-950 dark:text-fg">Health reporting active</p>
                         <p class="mt-1 text-xs leading-5 text-neutral-500 dark:text-fg-dim">
-                            Sentinel is connected and reporting server health to this Coolify instance.
+                            Sentinel is connected and reporting server health to this Code X Hosting instance.
                         </p>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
 
         @if ($server->isSentinelEnabled())
             <x-application.settings-section id="server-sentinel-connection-section" title="Connection"
-                helper="Configure how Sentinel authenticates with and reports to Coolify.">
+                helper="Configure how Sentinel authenticates with and reports to Code X Hosting.">
                 <x-slot:actions>
                     <x-forms.button canGate="update" :canResource="$server"
                         wire:click="regenerateSentinelToken">
@@ -69,8 +69,8 @@
                 </x-slot:actions>
                 <div class="grid gap-4 lg:grid-cols-2">
                     <x-forms.input canGate="update" :canResource="$server" id="sentinelCustomUrl"
-                        required label="Coolify URL"
-                        helper="Public URL used by Sentinel to reach this Coolify instance." />
+                        required label="Code X Hosting URL"
+                        helper="Public URL used by Sentinel to reach this Code X Hosting instance." />
                     <x-forms.input canGate="update" :canResource="$server" type="password"
                         id="sentinelToken" label="Sentinel token" required
                         helper="Authentication token used by Sentinel." />
@@ -88,7 +88,7 @@
                         helper="Days of CPU and memory history to retain." />
                     <x-forms.input canGate="update" :canResource="$server" type="number" min="10"
                         id="sentinelPushIntervalSeconds" label="Push interval" required
-                        helper="Seconds between health reports sent to Coolify." />
+                        helper="Seconds between health reports sent to Code X Hosting." />
                 </div>
             </x-application.settings-section>
 

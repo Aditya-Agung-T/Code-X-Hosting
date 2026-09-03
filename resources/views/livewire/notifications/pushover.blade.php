@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        Pushover Notifications | Coolify
+        Pushover Notifications | Code X Hosting
     </x-slot>
 
     <x-notification.settings-layout>

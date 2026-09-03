@@ -6,5 +6,5 @@
     <x-status-badge
         status="Restart limit reached"
         type="warning"
-        title="Container has crashed and Coolify stopped it after {{ $displayRestartCount }} restart attempts." />
+        title="Container has crashed and Code X Hosting stopped it after {{ $displayRestartCount }} restart attempts." />
 @endif

@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        {{ $github_app->name ?: 'GitHub App' }} | Sources | Coolify
+        {{ $github_app->name ?: 'GitHub App' }} | Sources | Code X Hosting
     </x-slot>
 
     @if (data_get($github_app, 'app_id'))
@@ -131,7 +131,7 @@
                                                     ['value' => false, 'label' => 'Only this team'],
                                                     ['value' => true, 'label' => 'Every team on this instance'],
                                                 ]"
-                                                    helper="System-wide GitHub Apps can be used by every team on this Coolify instance."
+                                                    helper="System-wide GitHub Apps can be used by every team on this Code X Hosting instance."
                                                     :disabled="!auth()->user()->can('update', $github_app)" />
                                             </div>
                                             @if ($isSystemWide)
@@ -181,12 +181,12 @@
                                                 <p class="mt-2 max-w-2xl text-[13px] leading-5 text-neutral-600 dark:text-fg-dim">
                                                     Permanently delete
                                                     <strong class="font-semibold text-black dark:text-fg">{{ $name ?: 'this GitHub App' }}</strong>
-                                                    from Coolify. Applications using this source will need another Git provider configured.
+                                                    from Code X Hosting. Applications using this source will need another Git provider configured.
                                                 </p>
                                                 <ul class="mt-3 space-y-1 text-xs text-neutral-500 dark:text-fg-dim">
                                                     <li>• The App registration on GitHub is not removed automatically.</li>
                                                     <li>• Linked applications keep their Git settings until you change them.</li>
-                                                    <li>• This source cannot be restored from Coolify after deletion.</li>
+                                                    <li>• This source cannot be restored from Code X Hosting after deletion.</li>
                                                 </ul>
                                             </div>
 
@@ -282,7 +282,7 @@
                                         ['value' => true, 'label' => 'Use a custom endpoint'],
                                     ]"
                                     x-model="useCustomWebhookEndpoint"
-                                    helper="Use a custom public URL when Coolify is behind a tunnel or reverse proxy." />
+                                    helper="Use a custom public URL when Code X Hosting is behind a tunnel or reverse proxy." />
                                 <div x-show="!useCustomWebhookEndpoint">
                                     <x-forms.listbox id="webhook_endpoint" label="Instance endpoint"
                                         :options="$endpointOptions" x-model="webhookEndpoint" />
@@ -310,7 +310,7 @@
                                     ['value' => false, 'label' => 'Do not update pull requests'],
                                     ['value' => true, 'label' => 'Read and update pull requests'],
                                 ]"
-                                helper="Write access lets Coolify post deployment status and links on pull requests." />
+                                helper="Write access lets Code X Hosting post deployment status and links on pull requests." />
 
                             <button type="button"
                                 class="button mt-auto w-full justify-center button-highlighted"

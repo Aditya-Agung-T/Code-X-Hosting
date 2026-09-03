@@ -73,7 +73,7 @@ class Transfer extends Component
         try {
             $this->authorize('update', $this->server);
             if ($this->isLocalhost) {
-                throw new \RuntimeException('The Coolify host (localhost) cannot be transferred.');
+                throw new \RuntimeException('The Code X Hosting host (localhost) cannot be transferred.');
             }
 
             $result = $migrator->migrate(
@@ -104,7 +104,7 @@ class Transfer extends Component
         try {
             $this->authorize('view', $this->server);
             if ($this->isLocalhost) {
-                throw new \RuntimeException('The Coolify host (localhost) cannot be transferred.');
+                throw new \RuntimeException('The Code X Hosting host (localhost) cannot be transferred.');
             }
 
             $bundle = $exporter->export($this->server, includeSensitive: true);
@@ -146,7 +146,7 @@ class Transfer extends Component
         try {
             $this->authorize('update', $this->server);
             if ($this->isLocalhost) {
-                throw new \RuntimeException('The Coolify host cannot be marked as transferred.');
+                throw new \RuntimeException('The Code X Hosting host cannot be marked as transferred.');
             }
 
             $result = $claimer->markTransferred(
@@ -169,7 +169,7 @@ class Transfer extends Component
         try {
             $this->authorize('update', $this->server);
             if ($this->isLocalhost) {
-                throw new \RuntimeException('The Coolify host cannot be claimed.');
+                throw new \RuntimeException('The Code X Hosting host cannot be claimed.');
             }
 
             $result = $claimer->claim(

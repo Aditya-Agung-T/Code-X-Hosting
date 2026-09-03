@@ -51,11 +51,11 @@
     </x-application.settings-section>
 
     <x-application.settings-section title="Network"
-        description="Control whether this Compose stack joins Coolify's predefined network.">
+        description="Control whether this Compose stack joins Code X Hosting's predefined network.">
         <x-forms.listbox canGate="update" :canResource="$service" id="connectToDockerNetwork" label="Network attachment" live onChange="instantSave"
             :disabled="! auth()->user()->can('update', $service)" :options="[
                 ['value' => false, 'label' => 'Use the stack network only'],
-                ['value' => true, 'label' => 'Connect to the predefined Coolify network'],
+                ['value' => true, 'label' => 'Connect to the predefined Code X Hosting network'],
             ]" />
     </x-application.settings-section>
 

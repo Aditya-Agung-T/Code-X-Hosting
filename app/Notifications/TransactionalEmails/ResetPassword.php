@@ -58,7 +58,7 @@ class ResetPassword extends Notification
         $mail = new MailMessage;
         $mail->from($from['address'], $from['name']);
         $mail->withSymfonyMessage(fn ($message) => prevent_mail_from_header_folding($message, $this->settings));
-        $mail->subject('Coolify: Reset Password');
+        $mail->subject('Code X Hosting: Reset Password');
         $mail->view('emails.reset-password', ['url' => $url, 'count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]);
 
         return $mail;

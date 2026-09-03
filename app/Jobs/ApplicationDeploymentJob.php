@@ -3490,6 +3490,21 @@ COPY ./nginx.conf /etc/nginx/conf.d/default.conf");
         }
         if ($this->mainServer->isLogDrainEnabled() && $this->application->isLogDrainEnabled()) {
             $docker_compose['services'][$this->container_name]['logging'] = generate_fluentd_configuration();
+        } else {
+            // Security: Prevent disk exhaustion from infinite stdout container logs in shared hosting
+            $docker_compose['services'][$this->container_name]['logging'] = [
+                'driver' => 'json-file',
+                'options' => [
+                    'max-size' => '10m',
+                    'max-file' => '3',
+                ],
+            ];
+        }
+
+        // Security: Prevent Fork Bombs in shared hosting via pids_limit
+        $pidsLimit = (int) config('constants.hosting.default_pids_limit', 100);
+        if ($pidsLimit > 0 && ! $this->mainServer->isSwarm()) {
+            $docker_compose['services'][$this->container_name]['pids_limit'] = $pidsLimit;
         }
         if ($this->application->settings->is_gpu_enabled) {
             $docker_compose['services'][$this->container_name]['deploy']['resources']['reservations']['devices'] = [

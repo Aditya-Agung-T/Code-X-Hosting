@@ -53,7 +53,7 @@
     }
 }">
     <x-slot:title>
-        Team Members | Coolify
+        Team Members | Code X Hosting
     </x-slot>
 
     <x-team.settings-layout>

@@ -208,7 +208,7 @@
 
                 <div x-show="selectedMigrateDestination" x-cloak class="mt-4">
                     <x-forms.checkbox id="migrateVolumeData" live label="Migrate persistent volume data"
-                        helper="Named Docker volumes and bind-mount host paths are transferred when both servers are managed by Coolify." />
+                        helper="Named Docker volumes and bind-mount host paths are transferred when both servers are managed by Code X Hosting." />
                 </div>
 
                 <div x-show="selectedMigrateDestination" x-cloak

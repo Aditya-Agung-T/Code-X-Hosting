@@ -54,7 +54,7 @@
             <div class="grid gap-4 lg:grid-cols-2">
                 <div class="lg:col-span-2">
                     <x-forms.input
-                        helper="Add supported docker run options used when the container starts. Unsupported options can interfere with Coolify automation."
+                        helper="Add supported docker run options used when the container starts. Unsupported options can interfere with Code X Hosting automation."
                         placeholder="--cap-add SYS_ADMIN --device=/dev/fuse"
                         id="customDockerRunOptions" label="Custom Docker options" canGate="update"
                         :canResource="$database" />

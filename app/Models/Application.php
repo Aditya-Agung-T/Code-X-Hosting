@@ -273,6 +273,22 @@ class Application extends BaseModel
             $application->manual_webhook_secret_gitlab ??= Str::random(40);
             $application->manual_webhook_secret_bitbucket ??= Str::random(40);
             $application->manual_webhook_secret_gitea ??= Str::random(40);
+
+            // Enforce default hosting resource quotas
+            if (config('constants.hosting.shared_server_enabled', true)) {
+                if (empty($application->limits_memory) || $application->limits_memory === '0') {
+                    $application->limits_memory = config('constants.hosting.default_limits_memory', '512m');
+                }
+                if (empty($application->limits_cpus) || $application->limits_cpus === '0') {
+                    $application->limits_cpus = config('constants.hosting.default_limits_cpus', '1.0');
+                }
+                if (empty($application->limits_memory_swap) || $application->limits_memory_swap === '0') {
+                    $application->limits_memory_swap = config('constants.hosting.default_limits_memory_swap', '0');
+                }
+                if (empty($application->limits_memory_reservation) || $application->limits_memory_reservation === '0') {
+                    $application->limits_memory_reservation = config('constants.hosting.default_limits_memory_reservation', '256m');
+                }
+            }
         });
         static::addGlobalScope('withRelations', function ($builder) {
             $builder->withCount([

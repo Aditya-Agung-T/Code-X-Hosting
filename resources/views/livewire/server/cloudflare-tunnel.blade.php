@@ -1,6 +1,6 @@
 <div>
     <x-slot:title>
-        {{ data_get_str($server, 'name')->limit(10) }} > Cloudflare Tunnel | Coolify
+        {{ data_get_str($server, 'name')->limit(10) }} > Cloudflare Tunnel | Code X Hosting
     </x-slot>
 
     <livewire:server.navbar :server="$server" />
@@ -56,7 +56,7 @@
 
             @if (!$isCloudflareTunnelsEnabled && $server->isFunctional())
                 <x-application.settings-section id="server-cloudflare-automated-section" title="Automated setup"
-                    helper="Let Coolify configure the Cloudflare SSH tunnel on this server.">
+                    helper="Let Code X Hosting configure the Cloudflare SSH tunnel on this server.">
                     <x-slot:actions>
                         <a class="button"
                             href="https://coolify.io/docs/knowledge-base/cloudflare/tunnels/server-ssh"

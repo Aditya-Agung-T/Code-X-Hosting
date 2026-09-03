@@ -93,11 +93,21 @@ class ResourceLimits extends Component
         $this->syncData(false);
     }
 
+    public function canEditLimits(): bool
+    {
+        return auth()->user()?->isInstanceAdmin() || config('constants.hosting.customer_can_change_limits', false);
+    }
+
     public function submit()
     {
         try {
             $this->authorize('update', $this->resource);
 
+            if (! $this->canEditLimits()) {
+                $this->dispatch('error', 'Resource limits are managed by the hosting administrator according to your plan.');
+
+                return;
+            }
             // Apply default values to properties
             if (! $this->limitsMemory) {
                 $this->limitsMemory = '0';

@@ -331,7 +331,7 @@ class Show extends Component
                 $this->dispatch(
                     'error',
                     'Cannot revalidate',
-                    'This server was transferred to another Coolify instance. Manage it from the target instance instead.'
+                    'This server was transferred to another Code X Hosting instance. Manage it from the target instance instead.'
                 );
 
                 return;

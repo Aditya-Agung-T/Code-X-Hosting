@@ -19,6 +19,23 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+function applyDefaultHostingDatabaseLimits($database): void
+{
+    if (config('constants.hosting.shared_server_enabled', true)) {
+        if (empty($database->limits_memory) || $database->limits_memory === '0') {
+            $database->limits_memory = config('constants.hosting.default_limits_memory', '512m');
+        }
+        if (empty($database->limits_cpus) || $database->limits_cpus === '0') {
+            $database->limits_cpus = config('constants.hosting.default_limits_cpus', '1.0');
+        }
+        if (empty($database->limits_memory_swap) || $database->limits_memory_swap === '0') {
+            $database->limits_memory_swap = config('constants.hosting.default_limits_memory_swap', '0');
+        }
+        if (empty($database->limits_memory_reservation) || $database->limits_memory_reservation === '0') {
+            $database->limits_memory_reservation = config('constants.hosting.default_limits_memory_reservation', '256m');
+        }
+    }
+}
 
 function create_standalone_postgresql($environmentId, StandaloneDocker|SwarmDocker $destination, ?array $otherData = null, string $databaseImage = 'postgres:16-alpine'): StandalonePostgresql
 {
@@ -33,6 +50,7 @@ function create_standalone_postgresql($environmentId, StandaloneDocker|SwarmDock
     if ($otherData) {
         $database->fill($otherData);
     }
+    applyDefaultHostingDatabaseLimits($database);
     $database->save();
 
     return $database;
@@ -56,6 +74,7 @@ function create_standalone_redis($environment_id, StandaloneDocker|SwarmDocker $
     if ($otherData) {
         $database->fill($otherData);
     }
+    applyDefaultHostingDatabaseLimits($database);
     $database->save();
 
     EnvironmentVariable::create([
@@ -89,6 +108,7 @@ function create_standalone_mongodb($environment_id, StandaloneDocker|SwarmDocker
     if ($otherData) {
         $database->fill($otherData);
     }
+    applyDefaultHostingDatabaseLimits($database);
     $database->save();
 
     return $database;
@@ -107,6 +127,7 @@ function create_standalone_mysql($environment_id, StandaloneDocker|SwarmDocker $
     if ($otherData) {
         $database->fill($otherData);
     }
+    applyDefaultHostingDatabaseLimits($database);
     $database->save();
 
     return $database;
@@ -125,6 +146,7 @@ function create_standalone_mariadb($environment_id, StandaloneDocker|SwarmDocker
     if ($otherData) {
         $database->fill($otherData);
     }
+    applyDefaultHostingDatabaseLimits($database);
     $database->save();
 
     return $database;
@@ -142,6 +164,7 @@ function create_standalone_keydb($environment_id, StandaloneDocker|SwarmDocker $
     if ($otherData) {
         $database->fill($otherData);
     }
+    applyDefaultHostingDatabaseLimits($database);
     $database->save();
 
     return $database;
@@ -159,6 +182,7 @@ function create_standalone_dragonfly($environment_id, StandaloneDocker|SwarmDock
     if ($otherData) {
         $database->fill($otherData);
     }
+    applyDefaultHostingDatabaseLimits($database);
     $database->save();
 
     return $database;
@@ -176,6 +200,7 @@ function create_standalone_clickhouse($environment_id, StandaloneDocker|SwarmDoc
     if ($otherData) {
         $database->fill($otherData);
     }
+    applyDefaultHostingDatabaseLimits($database);
     $database->save();
 
     return $database;

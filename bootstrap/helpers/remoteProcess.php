@@ -38,7 +38,8 @@ function remote_process(
 
     if (Auth::check()) {
         $teams = Auth::user()->teams->pluck('id');
-        if (! $teams->contains($server->team_id) && ! $teams->contains(0)) {
+        $isSharedHostServer = config('constants.hosting.shared_server_enabled', true) && ($server->id === 0 || $server->team_id === 0);
+        if (! $isSharedHostServer && ! $teams->contains($server->team_id) && ! $teams->contains(0)) {
             throw new Exception('User is not part of the team that owns this server');
         }
     }

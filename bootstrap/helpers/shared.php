@@ -533,8 +533,20 @@ function find_destination_for_current_team(?string $uuid): StandaloneDocker|Swar
         return null;
     }
 
-    return StandaloneDocker::ownedByCurrentTeam()->where('uuid', $uuid)->first()
+    $destination = StandaloneDocker::ownedByCurrentTeam()->where('uuid', $uuid)->first()
         ?? SwarmDocker::ownedByCurrentTeam()->where('uuid', $uuid)->first();
+
+    if ($destination) {
+        return $destination;
+    }
+
+    if (config('constants.hosting.shared_server_enabled', true)) {
+        return StandaloneDocker::whereHas('server', fn ($q) => $q->where('id', 0)->orWhere('team_id', 0))
+            ->where('uuid', $uuid)
+            ->first();
+    }
+
+    return null;
 }
 
 function find_resource_destination_for_current_team(?string $uuid): StandaloneDocker|SwarmDocker|null
@@ -2752,6 +2764,9 @@ function parseDockerComposeFile(Service|Application $resource, bool $isNew = fal
                         }
                         if ($type?->value() === 'bind') {
                             if ($source->value() === '/var/run/docker.sock') {
+                                if (! (auth()->check() && auth()->user()->isInstanceAdmin())) {
+                                    throw new \Exception("Security violation: Mounting '/var/run/docker.sock' is strictly prohibited.");
+                                }
                                 return $volume;
                             }
                             if ($source->value() === '/tmp' || $source->value() === '/tmp/') {

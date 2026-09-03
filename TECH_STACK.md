@@ -1,4 +1,4 @@
-# Coolify Technology Stack
+# Code X Hosting Technology Stack
 
 ## Frontend
 

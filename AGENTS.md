@@ -4,7 +4,7 @@ This file provides guidance to agentic coding tools when working with code in th
 
 ## Project Overview
 
-Coolify is an open-source, self-hostable PaaS (alternative to Heroku/Netlify/Vercel). It manages servers, applications, databases, and services via SSH. Built with Laravel 12 (using Laravel 10 file structure), Livewire 3, and Tailwind CSS v4.
+Code X Hosting is an open-source, self-hostable PaaS (alternative to Heroku/Netlify/Vercel). It manages servers, applications, databases, and services via SSH. Built with Laravel 12 (using Laravel 10 file structure), Livewire 3, and Tailwind CSS v4.
 
 ## Design Reference
 
@@ -19,7 +19,7 @@ Docker Compose-based dev setup with services: coolify (app), postgres, redis, so
 docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 docker compose -f docker-compose.yml -f docker-compose.dev.yml down                        # stop services
 
-# Two local Coolify instances (isolated stacks; server transfer / multi-control-plane)
+# Two local Code X Hosting instances (isolated stacks; server transfer / multi-control-plane)
 ./scripts/dev-instances up                   # a:8000 + b:8001 (uses npm run build for CSS/JS)
 ./scripts/dev-instances up a --with vite     # HMR only when starting a single instance
 ./scripts/dev-instances urls
@@ -40,13 +40,13 @@ Use the following workflow to test a self-hosted upgrade:
    bash upgrade.sh sha-6492d081362c009519481ac70e50873e39ba1861
    ```
 
-2. Set the current Coolify version and rebuild the cached configuration:
+2. Set the current Code X Hosting version and rebuild the cached configuration:
 
    ```bash
    docker exec -e COOLIFY_VERSION=4.3.0 coolify php artisan config:cache
    ```
 
-3. In the Coolify UI, click **Check for Updates**.
+3. In the Code X Hosting UI, click **Check for Updates**.
 4. Confirm that an upgrade is available, then click **Upgrade** and verify that the upgrade completes successfully.
 
 ## Common Commands
@@ -169,14 +169,14 @@ Because the "server" and the test share one PHP process, they share the phpunit 
 
 ### Instance sentinels (`id = 0`)
 
-Coolify seeds **instance-owned** rows at primary key `0`. That value is a sentinel meaning “this is the Coolify instance itself”, not a normal autoincrement id. Do not migrate, resequence, or “fix” these to a positive id.
+Code X Hosting seeds **instance-owned** rows at primary key `0`. That value is a sentinel meaning “this is the Code X Hosting instance itself”, not a normal autoincrement id. Do not migrate, resequence, or “fix” these to a positive id.
 
 | Record | Model / lookup | Meaning |
 |---|---|---|
 | Root team | `Team::find(0)`, `team_id === 0` | Instance / root team. Cloud billing and many skip-checks exempt `team_id === 0`. |
-| Localhost server | `Server::find(0)` / `findOrFail(0)` | The machine running Coolify. Upgrades, instance backups, and docker inspect target this server. |
+| Localhost server | `Server::find(0)` / `findOrFail(0)` | The machine running Code X Hosting. Upgrades, instance backups, and docker inspect target this server. |
 | Instance settings | `InstanceSettings` with `id = 0` | Singleton settings row. Tests must seed `InstanceSettings::create(['id' => 0])` (or `forceCreate`). |
-| Instance Postgres | `StandalonePostgresql` `id = 0`, name `coolify-db` | Coolify’s own database. UI treats `database_id === 0` as the instance DB (e.g. hide delete on backup screens). |
+| Instance Postgres | `StandalonePostgresql` `id = 0`, name `coolify-db` | Code X Hosting’s own database. UI treats `database_id === 0` as the instance DB (e.g. hide delete on backup screens). |
 | Local docker dest | `StandaloneDocker` `id = 0` | Destination on the localhost server (`destination_id = 0`). |
 | Root user / default GitHub App | seeders | First-install defaults. |
 

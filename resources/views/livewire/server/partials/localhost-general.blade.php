@@ -1,7 +1,7 @@
                 <form wire:submit.prevent="submit" class="application-settings-form flex flex-col gap-6">
                     <x-unsaved-bar action="submit" />
                     <x-application.settings-section id="server-overview-section" title="Server overview"
-                        helper="Operating system and hardware details for the server running this Coolify instance.">
+                        helper="Operating system and hardware details for the server running this Code X Hosting instance.">
                         <x-slot:actions>
                             @if ($server->server_metadata)
                                 <x-forms.button type="button" class="size-8! px-0!"
@@ -53,7 +53,7 @@
                     @endif
 
                     <x-application.settings-section id="server-connection-section" title="Connection"
-                        helper="Configure how Coolify identifies and connects to this server.">
+                        helper="Configure how Code X Hosting identifies and connects to this server.">
                         <x-slot:actions>
                             <x-forms.button type="button" wire:click.prevent="checkLocalhostConnection"
                                 canGate="update" :canResource="$server">

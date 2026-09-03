@@ -91,7 +91,7 @@ class SettingsBackup extends Component
             $this->database->forceFill([
                 'id' => 0,
                 'name' => 'coolify-db',
-                'description' => 'Coolify database',
+                'description' => 'Code X Hosting database',
                 'postgres_user' => $postgres_user,
                 'postgres_password' => $postgres_password,
                 'postgres_db' => $postgres_db,

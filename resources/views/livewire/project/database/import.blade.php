@@ -12,7 +12,7 @@
         <x-application.settings-section title="Restore database"
             description="Import a backup into this database.">
             <x-empty title="Start the database first"
-                description="The database must be running before Coolify can restore a backup."
+                description="The database must be running before Code X Hosting can restore a backup."
                 icon-name="database" size="sm" />
         </x-application.settings-section>
     @endif

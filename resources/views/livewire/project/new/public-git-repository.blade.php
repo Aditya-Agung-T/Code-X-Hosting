@@ -31,7 +31,7 @@
                     Need a sample? Browse
                     <a class="font-medium text-coollabs hover:underline dark:text-warning"
                         href="https://github.com/coollabsio/coolify-examples/" target="_blank">
-                        Coolify Examples
+                        Code X Hosting Examples
                     </a>.
                 </p>
             </div>
@@ -44,7 +44,7 @@
                 <div class="application-settings-section-header">
                     <div>
                         <h2>Build configuration</h2>
-                        <p>Choose how Coolify builds and runs this repository.</p>
+                        <p>Choose how Code X Hosting builds and runs this repository.</p>
                     </div>
                     <x-forms.button type="submit" isHighlighted>Continue</x-forms.button>
                 </div>
