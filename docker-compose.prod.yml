@@ -3,15 +3,15 @@ services:
     image: "${REGISTRY_URL:-docker.io}/coollabsio/coolify:${LATEST_IMAGE:-latest}"
     volumes:
       - type: bind
-        source: /data/coolify/source/.env
+        source: /data/codex-hosting/source/.env
         target: /var/www/html/.env
         read_only: true
-      - /data/coolify/ssh:/var/www/html/storage/app/ssh
-      - /data/coolify/applications:/var/www/html/storage/app/applications
-      - /data/coolify/databases:/var/www/html/storage/app/databases
-      - /data/coolify/services:/var/www/html/storage/app/services
-      - /data/coolify/backups:/var/www/html/storage/app/backups
-      - /data/coolify/images:/var/www/html/storage/app/images
+      - /data/codex-hosting/ssh:/var/www/html/storage/app/ssh
+      - /data/codex-hosting/applications:/var/www/html/storage/app/applications
+      - /data/codex-hosting/databases:/var/www/html/storage/app/databases
+      - /data/codex-hosting/services:/var/www/html/storage/app/services
+      - /data/codex-hosting/backups:/var/www/html/storage/app/backups
+      - /data/codex-hosting/images:/var/www/html/storage/app/images
     environment:
       - APP_ENV=${APP_ENV:-production}
       - PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT:-256M}
@@ -20,7 +20,7 @@ services:
       - PHP_FPM_PM_MIN_SPARE_SERVERS=${PHP_FPM_PM_MIN_SPARE_SERVERS:-1}
       - PHP_FPM_PM_MAX_SPARE_SERVERS=${PHP_FPM_PM_MAX_SPARE_SERVERS:-10}
     env_file:
-      - /data/coolify/source/.env
+      - /data/codex-hosting/source/.env
     ports:
       - "${APP_PORT:-8000}:8080"
     expose:
@@ -67,7 +67,7 @@ services:
       - "${SOKETI_PORT:-6001}:6001"
       - "6002:6002"
     volumes:
-      - /data/coolify/ssh:/var/www/html/storage/app/ssh
+      - /data/codex-hosting/ssh:/var/www/html/storage/app/ssh
     environment:
       APP_NAME: "${APP_NAME:-Coolify}"
       SOKETI_DEBUG: "${SOKETI_DEBUG:-false}"

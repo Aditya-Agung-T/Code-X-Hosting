@@ -48,6 +48,7 @@ function isSensitiveHostPath(string $path): bool
         '/usr',
         '/var',
         '/var/run',
+        '/data/codex-hosting',
         '/data/coolify',
         '/tmp/coolify',
     ];
@@ -67,6 +68,7 @@ function isSensitiveHostPath(string $path): bool
         '/sbin/',
         '/lib/',
         '/lib64/',
+        '/data/codex-hosting/',
         '/data/coolify/',
         '/tmp/coolify/',
     ];

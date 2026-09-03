@@ -30,7 +30,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-DATA_DIR="/data/coolify"
+DATA_DIR="/data/codex-hosting"
 SOURCE_DIR="${DATA_DIR}/source"
 ENV_FILE="${SOURCE_DIR}/.env"
 
@@ -67,12 +67,16 @@ fi
 echo -e "${BLUE}[2/8] Setting up directory structure in ${DATA_DIR}...${NC}"
 mkdir -p "${DATA_DIR}"/{source,ssh/keys,applications,databases,services,backups,images}
 
-# Copy repository source code to /data/coolify/source if running from another directory
+# Create backwards-compatibility symlink
+if [ ! -e "/data/coolify" ]; then
+    ln -sfn "${DATA_DIR}" /data/coolify
+fi
+
+# Copy repository source code to /data/codex-hosting/source if running from another directory
 if [ "$SCRIPT_DIR" != "$SOURCE_DIR" ]; then
     echo -e "${YELLOW} - Synchronizing Code X Hosting source code to ${SOURCE_DIR}...${NC}"
     cp -r "${SCRIPT_DIR}/." "${SOURCE_DIR}/"
 fi
-
 cd "${SOURCE_DIR}"
 
 # 3. Setup Environment File (.env)
@@ -120,6 +124,7 @@ set_env "DEFAULT_HOSTING_MEMORY_SWAP" "0"
 set_env "CUSTOMER_CAN_CHANGE_LIMITS" "false"
 set_env "MAX_RESOURCES_PER_TEAM" "2"
 set_env "DEFAULT_HOSTING_PIDS_LIMIT" "100"
+set_env "BASE_CONFIG_PATH" "/data/codex-hosting"
 
 # 4. Generate Localhost SSH Key
 echo -e "${BLUE}[4/8] Configuring Localhost SSH access...${NC}"

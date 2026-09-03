@@ -47,8 +47,8 @@ Connect to your VPS via SSH and run:
 
 ```bash
 # Step 1: Create target directory
-sudo mkdir -p /data/coolify
-cd /data/coolify
+sudo mkdir -p /data/codex-hosting
+cd /data/codex-hosting
 
 # Step 2: Clone Code X Hosting
 sudo git clone https://github.com/Aditya-Agung-T/Code-X-Hosting.git source
@@ -84,7 +84,7 @@ Once installation completes, access your panel at:
 
 ## ⚙️ Environment Configuration (`.env`)
 
-You can customize your hosting limits at any time in `/data/coolify/source/.env`:
+You can customize your hosting limits at any time in `/data/codex-hosting/source/.env`:
 
 ```env
 # Shared Server Hosting Engine
@@ -111,7 +111,7 @@ AUTOUPDATE=false
 
 After modifying `.env`, restart the services:
 ```bash
-cd /data/coolify/source
+cd /data/codex-hosting/source
 docker compose -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.override.yml up -d
 ```
 
@@ -122,8 +122,7 @@ docker compose -f docker-compose.yml -f docker-compose.prod.yml -f docker-compos
 | Vector | Protection Mechanism |
 | :--- | :--- |
 | **Docker Socket Hijack** | `/var/run/docker.sock` mounts are strictly blocked for all non-admin tenants. |
-| **Host System Access** | Dangerous paths (`/etc`, `/root`, `/proc`, `/sys`, `/data/coolify`) cannot be mounted. |
-| **Privilege Escalation** | `privileged: true`, `cap_add`, and direct device access are stripped and rejected. |
+| **Host System Access** | Dangerous paths (`/etc`, `/root`, `/proc`, `/sys`, `/data/codex-hosting`) cannot be mounted. |
 | **Network Interception** | `network_mode: host` is blocked; customers route exclusively through Traefik/Caddy. |
 | **Domain Spoofing** | Global domain conflict checks prevent customers from hijacking admin panel or sibling domains. |
 | **Fork Bomb Defense** | `pids_limit: 100` enforces kernel process isolation per container. |

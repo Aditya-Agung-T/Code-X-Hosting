@@ -69,7 +69,7 @@ use Symfony\Component\Yaml\Yaml;
 
 function base_configuration_dir(): string
 {
-    return '/data/coolify';
+    return env('BASE_CONFIG_PATH', '/data/codex-hosting');
 }
 function application_configuration_dir(): string
 {
